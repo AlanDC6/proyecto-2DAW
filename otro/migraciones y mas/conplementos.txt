@@ -1,0 +1,14 @@
+DB::table('complementos')->insert([
+    [
+        'categoria_complementos' => 'anillo',
+        'talla' => 'L',
+    ],
+    [
+        'categoria_complementos' => 'collar',
+        'talla' => 'M',
+    ],
+    [
+        'categoria_complementos' => 'pendiente',
+        'talla' => 'S',
+    ],
+]);
