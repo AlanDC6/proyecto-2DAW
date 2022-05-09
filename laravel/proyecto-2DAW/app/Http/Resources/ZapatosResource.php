@@ -14,8 +14,6 @@ class ZapatosResource extends JsonResource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
-
         return [
             'id' => $this->id,
             'categoria_zapatos' => $this->categoria_zapatos,

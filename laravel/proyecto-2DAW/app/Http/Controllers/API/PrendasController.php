@@ -9,6 +9,8 @@ use App\Http\Resources\PrendasResource;
 use App\Models\Prendas;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\returnSelf;
+
 class PrendasController extends Controller
 {
     /**
@@ -29,8 +31,7 @@ class PrendasController extends Controller
      */
     public function store(GuardarPrendasRequest $request)
     {
-        return (new PrendasResource(Prendas::create($request->all())))
-        ->additional(['msg' => 'Prenda guardado correctamente']);
+        return new PrendasResource(Prendas::create($request->all()));
     }
 
     /**
@@ -39,9 +40,9 @@ class PrendasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Prendas $prendas)
+    public function show($id)
     {
-        return new PrendasResource($prendas);
+        return new PrendasResource(Prendas::find($id));
     }
 
     /**
@@ -51,10 +52,10 @@ class PrendasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarPrendasRequest $request, Prendas $prendas)
+    public function update(ActualizarPrendasRequest $request, $id)
     {
-        $prendas->update($request->all());
-        return (new PrendasResource($prendas))
+        Prendas::find($id)->update($request->all());
+        return (new PrendasResource(Prendas::find($id)))
         ->additional(['msg' => 'Prenda actualizada corractamente'])
         ->response()
         ->setStatusCode(202);
@@ -66,10 +67,12 @@ class PrendasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Prendas $prendas)
+    public function destroy($id)
     {
-        $prendas->delete();
-        return (new PrendasResource($prendas))
-        ->additional(['msg' => 'Prenda eliminada corractamente']);
+        Prendas::find($id)->delete();
+        return response()->json([
+            'res' => true,
+            'msg' => 'Prenda eliminada correctamente'
+        ]);
     }
 }

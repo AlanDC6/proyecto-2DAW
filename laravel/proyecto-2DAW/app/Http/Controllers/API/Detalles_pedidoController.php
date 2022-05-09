@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActualizarDetalles_pedidoRequest;
+use App\Http\Requests\GuardarDetalles_pedidoRequest;
+use App\Http\Resources\Detalles_pedidoResource;
+use App\Models\Detalles_pedido;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class Detalles_pedidoController extends Controller
 {
@@ -14,7 +20,7 @@ class Detalles_pedidoController extends Controller
      */
     public function index()
     {
-        //
+        return Detalles_pedidoResource::collection(Detalles_pedido::all());
     }
 
     /**
@@ -23,9 +29,9 @@ class Detalles_pedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GuardarDetalles_pedidoRequest $request)
     {
-        //
+        return new Detalles_pedidoResource(Detalles_pedido::create($request->all()));
     }
 
     /**
@@ -36,7 +42,7 @@ class Detalles_pedidoController extends Controller
      */
     public function show($id)
     {
-        //
+        return new Detalles_pedidoResource(Detalles_pedido::find($id));
     }
 
     /**
@@ -46,9 +52,13 @@ class Detalles_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActualizarDetalles_pedidoRequest $request, $id)
     {
-        //
+        Detalles_pedido::find($id)->update($request->all());
+        return (new Detalles_pedidoResource(Detalles_pedido::find($id)))
+        ->additional(['msg' => 'Detalles actualizado corractamente'])
+        ->response()
+        ->setStatusCode(202);
     }
 
     /**
@@ -59,6 +69,10 @@ class Detalles_pedidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Detalles_pedido::find($id)->delete();
+        return response()->json([
+            'res' => true,
+            'msg' => 'Detalles eliminado correctamente'
+        ]);
     }
 }

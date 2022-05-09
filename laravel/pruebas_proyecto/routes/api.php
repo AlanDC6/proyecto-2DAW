@@ -29,7 +29,6 @@ Route::apiResource('productos' , ProductoController::class);
 Route::apiResource('usuarios' , UsuarioController::class);
 Route::apiResource('detalles_pedido' , Detalles_pedidoController::class);
 Route::apiResource('productos_pedido' , Productos_pedidoController::class);
-Route::apiResource('zapatos' , ZapatosController::class);
 Route::apiResource('complementos' , ComplementosController::class);
 
 // -------------------

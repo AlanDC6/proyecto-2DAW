@@ -31,8 +31,7 @@ class ZapatosController extends Controller
      */
     public function store(GuardarZapatosRequest $request)
     {
-        return (new ZapatosResource(Zapatos::create($request->all())))
-        ->additional(['msg' => 'Zapatos guardado correctamente']);
+        return new ZapatosResource(Zapatos::create($request->all()));
     }
 
     /**
@@ -41,9 +40,9 @@ class ZapatosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Zapatos $zapatos)
+    public function show($id)
     {
-        return new ZapatosResource($zapatos);
+        return new ZapatosResource(Zapatos::find($id));
     }
 
     /**
@@ -53,10 +52,10 @@ class ZapatosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarZapatosRequest $request, Zapatos $zapatos)
+    public function update(ActualizarZapatosRequest $request, $id)
     {
-        $zapatos->update($request->all());
-        return (new ZapatosResource($zapatos))
+        Zapatos::find($id)->update($request->all());
+        return (new ZapatosResource(Zapatos::find($id)))
         ->additional(['msg' => 'Zapato actualizado corractamente'])
         ->response()
         ->setStatusCode(202);
@@ -68,10 +67,12 @@ class ZapatosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Zapatos $zapatos)
+    public function destroy($id)
     {
-        $zapatos->delete();
-        return (new ZapatosResource($zapatos))
-        ->additional(['msg' => 'Zapatos eliminados corractamente']);
+        Zapatos::find($id)->delete();
+        return response()->json([
+            'res' => true,
+            'msg' => 'Zapato eliminado correctamente'
+        ]);
     }
 }

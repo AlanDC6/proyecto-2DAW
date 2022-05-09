@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActualizarProductos_pedidoRequest;
+use App\Http\Requests\GuardarProductos_pedidoRequest;
+use App\Http\Resources\Productos_pedidoResource;
+use App\Models\Productos_pedido;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class Productos_pedidoController extends Controller
 {
@@ -14,7 +20,7 @@ class Productos_pedidoController extends Controller
      */
     public function index()
     {
-        //
+        return Productos_pedidoResource::collection(Productos_pedido::all());
     }
 
     /**
@@ -23,9 +29,9 @@ class Productos_pedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GuardarProductos_pedidoRequest $request)
     {
-        //
+        return new Productos_pedidoResource(Productos_pedido::create($request->all()));
     }
 
     /**
@@ -36,7 +42,7 @@ class Productos_pedidoController extends Controller
      */
     public function show($id)
     {
-        //
+        return new Productos_pedidoResource(Productos_pedido::find($id));
     }
 
     /**
@@ -46,9 +52,13 @@ class Productos_pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActualizarProductos_pedidoRequest $request, $id)
     {
-        //
+        Productos_pedido::find($id)->update($request->all());
+        return (new Productos_pedidoResource(Productos_pedido::find($id)))
+        ->additional(['msg' => 'Zapato actualizado corractamente'])
+        ->response()
+        ->setStatusCode(202);
     }
 
     /**
@@ -59,6 +69,10 @@ class Productos_pedidoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Productos_pedido::find($id)->delete();
+        return response()->json([
+            'res' => true,
+            'msg' => 'Zapato eliminado correctamente'
+        ]);
     }
 }

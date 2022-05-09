@@ -3,7 +3,13 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActualizarComplementosRequest;
+use App\Http\Requests\GuardarComplementosRequest;
+use App\Http\Resources\ComplementosResource;
+use App\Models\Complementos;
 use Illuminate\Http\Request;
+
+use function PHPUnit\Framework\returnSelf;
 
 class ComplementosController extends Controller
 {
@@ -14,7 +20,7 @@ class ComplementosController extends Controller
      */
     public function index()
     {
-        //
+        return ComplementosResource::collection(Complementos::all());
     }
 
     /**
@@ -23,9 +29,9 @@ class ComplementosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GuardarComplementosRequest $request)
     {
-        //
+        return new ComplementosResource(Complementos::create($request->all()));
     }
 
     /**
@@ -36,7 +42,7 @@ class ComplementosController extends Controller
      */
     public function show($id)
     {
-        //
+        return new ComplementosResource(Complementos::find($id));
     }
 
     /**
@@ -46,9 +52,13 @@ class ComplementosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActualizarComplementosRequest $request, $id)
     {
-        //
+        Complementos::find($id)->update($request->all());
+        return (new ComplementosResource(Complementos::find($id)))
+        ->additional(['msg' => 'Complemento actualizado corractamente'])
+        ->response()
+        ->setStatusCode(202);
     }
 
     /**
@@ -59,6 +69,10 @@ class ComplementosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Complementos::find($id)->delete();
+        return response()->json([
+            'res' => true,
+            'msg' => 'Complemento eliminado correctamente'
+        ]);
     }
 }

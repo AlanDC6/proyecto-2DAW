@@ -8,6 +8,9 @@ use App\Http\Requests\GuardarUsuarioRequest;
 use App\Http\Resources\UsuarioResource;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
+use function PHPUnit\Framework\returnSelf;
 
 class UsuarioController extends Controller
 {
@@ -29,8 +32,21 @@ class UsuarioController extends Controller
      */
     public function store(GuardarUsuarioRequest $request)
     {
-        return (new UsuarioResource(Usuario::create($request->all())))
-        ->additional(['msg' => 'Usuario guardado correctamente']);
+        $nuevoUsuario = new Usuario;
+        
+        $nuevoUsuario->nombre = $request->nombre;
+        $nuevoUsuario->apellidos = $request->apellidos;
+        $nuevoUsuario->email = $request->email;
+        $nuevoUsuario->contraseña = Hash::make($request->contraseña);
+        $nuevoUsuario->genero = $request->genero;
+
+        // return new UsuarioResource(Usuario::create(           
+            $nuevoUsuario->save();
+            return response()->json([
+                'res' => true,
+                'msg' => 'Usuario creado correctamente'
+            ]);
+        // ));
     }
 
     /**
@@ -39,9 +55,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuario $usuario)
+    public function show($id)
     {
-        return new UsuarioResource($usuario);
+        return new UsuarioResource(Usuario::find($id));
     }
 
     /**
@@ -51,10 +67,10 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ActualizarUsuarioRequest $request, Usuario $usuario)
+    public function update(ActualizarUsuarioRequest $request, $id)
     {
-        $usuario->update($request->all());
-        return (new UsuarioResource($usuario))
+        Usuario::find($id)->update($request->all());
+        return (new UsuarioResource(Usuario::find($id)))
         ->additional(['msg' => 'Usuario actualizado corractamente'])
         ->response()
         ->setStatusCode(202);
@@ -66,10 +82,12 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuario $usuario)
+    public function destroy($id)
     {
-        $usuario->delete();
-        return (new UsuarioResource($usuario))
-        ->additional(['msg' => 'Usuario eliminado corractamente']);
+        Usuario::find($id)->delete();
+        return response()->json([
+            'res' => true,
+            'msg' => 'Usuario eliminado correctamente'
+        ]);
     }
 }
