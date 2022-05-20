@@ -20,6 +20,7 @@ class ProductoResource extends JsonResource
         return [
             'id' => $this->id,
             'titulo' => Str::upper($this->titulo),
+            'descripcion' => $this->descripcion,
             'categoria_prenda' => $this->categoria_prenda,
             'genero' => $this->genero,
             'marca' => $this->marca,

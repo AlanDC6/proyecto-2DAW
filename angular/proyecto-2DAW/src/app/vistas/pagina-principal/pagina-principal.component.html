@@ -1,0 +1,115 @@
+<div style="height: 56px;"></div>
+<div class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container">
+        <ul class="navbar-nav mx-auto">
+            <li class="nav-item ">
+            <a class="nav-link" href="#">REBAJAS</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Ropa</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Zapatos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="#">Complemetos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Deporte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Marcas</a>
+            </li>
+            <div class="container h-100">
+                <div class="d-flex justify-content-center h-100">
+                  <div class="searchbar">
+                    <input class="search_input" type="text" name="" placeholder="Buscar...">
+                    <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                  </div>
+                </div>
+              </div>
+        </ul>
+        
+        
+    </div>
+</div>
+<div>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+        <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')">
+            <div class="carousel-caption">
+            <h5 class="text-uppercase">Colección verano 2022</h5>
+            <p>Compra las novedades del verano de 2022.</p>
+            <a href="#" class="btn btn-icon btn-light"><i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')">
+            <div class="carousel-caption">
+            <h5 class="text-uppercase">Playeros de deporte</h5>
+            <p>Nueva colección de playeros para hacer deporte con las mejores marcas.</p>
+            <a href="#" class="btn btn-icon btn-light"><i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+        </div>
+        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/lHGeqh3XhRY/1920x1080')">
+            <div class="carousel-caption">
+            <h5 class="text-uppercase">Sudaderas con capucha</h5>
+            <p>Comprar sudaderas con capucha de diferentes marcas, colores y estampados.</p>
+            <a href="#" class="btn btn-icon btn-light"><i class="fa-solid fa-arrow-right-long"></i></a>
+            </div>
+        </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <section class="container py-5">
+        <div class="row text-center pt-3">
+            <div class="col-lg-6 m-auto">
+                <h1 class="text-uppercase">Categorias</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="./assets/img/sudadera_1.jpg" class="rounded-circle img-fluid border"></a>
+                <h5 class="text-center mt-3 mb-3">Ropa</h5>
+                <p class="text-center"><a class="btn btn-success">Comprar</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="./assets/img/category_img_02.jpg" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Calzado</h2>
+                <p class="text-center"><a class="btn btn-success">Comprar</a></p>
+            </div>
+            <div class="col-12 col-md-4 p-5 mt-3">
+                <a href="#"><img src="./assets/img/category_img_03.jpg" class="rounded-circle img-fluid border"></a>
+                <h2 class="h5 text-center mt-3 mb-3">Complementos</h2>
+                <p class="text-center"><a class="btn btn-success">Comprar</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-light">
+        <div class="container py-5">
+            <div class="row text-center py-3">
+                <div class="col-lg-6 m-auto">
+                    <h1 class="h1">Productos Recomendados</h1>
+                </div>
+            </div>
+            <div class="row">
+                <app-producto-recomendado class="col-12 col-md-4"></app-producto-recomendado>
+                <app-producto-recomendado class="col-12 col-md-4"></app-producto-recomendado>
+                <app-producto-recomendado class="col-12 col-md-4"></app-producto-recomendado>
+            </div>
+        </div>
+    </section>
+</div>
