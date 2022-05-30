@@ -18,16 +18,16 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('descripcion');
             $table->string('tipo');
-            $table->string('categoria_prenda');
+            $table->string('categoria_prenda')->nullable();
             $table->string('genero');
             $table->string('marca');
             $table->string('precio');
-            $table->string('valoracion')->nullable();
+            $table->string('valoracion')->nullable()->default('5');
             $table->string('imagen')->default('img/productos/default.jpg');
             $table->string('img2')->default('img/productos/default.jpg');
             $table->string('img3')->default('img/productos/default.jpg');
             $table->string('img4')->default('img/productos/default.jpg');
-            $table->string('etiquetas')->nullable();
+            $table->string('etiquetas')->nullable()->default(null);
             $table->timestamps();
         });
     }
