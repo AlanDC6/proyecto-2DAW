@@ -22,12 +22,12 @@ return new class extends Migration
             $table->string('genero');
             $table->string('marca');
             $table->string('precio');
-            $table->string('valoracion');
-            $table->string('imagen');
-            $table->string('img2');
-            $table->string('img3');
-            $table->string('img4');
-            $table->string('etiquetas');
+            $table->string('valoracion')->nullable();
+            $table->string('imagen')->default('img/productos/default.jpg');
+            $table->string('img2')->default('img/productos/default.jpg');
+            $table->string('img3')->default('img/productos/default.jpg');
+            $table->string('img4')->default('img/productos/default.jpg');
+            $table->string('etiquetas')->nullable();
             $table->timestamps();
         });
     }

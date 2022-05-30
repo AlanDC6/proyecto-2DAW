@@ -19,7 +19,7 @@ class usuarios
         if (auth()->user()->tipo_usuario == "1") {
             return $next($request);
         } else {
-            return redirect('/');
+            return redirect('/compraventa_administrar');
         }
     }
 }
