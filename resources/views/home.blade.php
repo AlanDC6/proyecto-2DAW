@@ -16,6 +16,8 @@
                                 </div>
                                 <h5 class="f-w-600">{{ Auth::user()->name }}</h5>
                                 <br>
+                                <p>Saldo: {{ Auth::user()->saldo }} €</p>
+                                <br>
                                 <a class="btn text-white" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();">Cerrar sesion <i
                                         class="fa-solid fa-right-from-bracket"></i></a>

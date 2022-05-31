@@ -18,6 +18,10 @@ class detalles_pedidoController extends Controller
         $id = auth()->user()->id;
         $usuario = User::find($id);
 
+        if ($usuario->saldo <= $precioTotal) {
+            return view('error_saldo');
+        }
+
         $usuario->saldo = $usuario->saldo - $precioTotal;
 
         $usuario->save();
